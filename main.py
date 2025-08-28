@@ -11,7 +11,57 @@ class Hangman:
         rand_index = r.randint(0, len(secret_words)-1)
         return secret_words[rand_index]
     def hanged(self, trial_index):
-        return "Not yet implemented..."
+        HANGMANPICS = ['''
+          +---+
+          |   |
+              |
+              |
+              |
+              |
+        =========''', '''
+          +---+
+          |   |
+          O   |
+              |
+              |
+              |
+        =========''', '''
+          +---+
+          |   |
+          O   |
+          |   |
+              |
+              |
+        =========''', '''
+          +---+
+          |   |
+          O   |
+         /|   |
+              |
+              |
+        =========''', '''
+          +---+
+          |   |
+          O   |
+         /|\  |
+              |
+              |
+        =========''', '''
+          +---+
+          |   |
+          O   |
+         /|\  |
+         /    |
+              |
+        =========''', '''
+          +---+
+          |   |
+          O   |
+         /|\  |
+         / \  |
+              |
+        =========''']
+        return HANGMANPICS[trial_index];
     def check_win(self):
         print("You win")
     def draw_board(self,data):
@@ -36,10 +86,10 @@ class Hangman:
         print("  Prepare to play to the death")
         print("---------------------------------")
         print()
-        MAX_TRIALS = 5
+        MAX_TRIALS = 7
         greetings = 0
         game_result = False
-        print("You are given a maximum of 5 trials, Try not to misuse.!!!")
+        print("You are given a maximum of ",MAX_TRIALS," trials, Try not to misuse.!!!")
         print()
         print("You are required to find the secret word, Don't try to lose....")
         choice = input("Type 'begin' to start game or 'rule' to note game rules...")
@@ -64,7 +114,8 @@ class Hangman:
                     print(board)
                     if data not in secret_word:
                         self.trials+=1
-                        self.hanged(self.trials)
+                        #print("yoooo")
+                        print(self.hanged(self.trials-1))
                     else:
                         #greets users while playing...
                         match greetings:
@@ -88,6 +139,8 @@ class Hangman:
                 if board == secret_word:
                     self.check_win()
                     break
+            if board != secret_word:
+                print("You Lose!!!")
         else:
             print("Below are the game rules:")
             print("1. You are given a maximum of 5 trials, find the guess number within those trials,\n the more you lose, the more your trials reduces")
